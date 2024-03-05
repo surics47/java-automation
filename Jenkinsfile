@@ -18,6 +18,8 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
+                    sh 'ls -la'
+                    sh 'docker --version'
                     docker.build("${ECR_REGISTRY}/${DOCKER_IMAGE}")
                 }
             }
