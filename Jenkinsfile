@@ -23,7 +23,7 @@ pipeline {
                 script{
                     sh 'ls -la'
                     sh 'docker --version'
-                    docker.build("${ECR_REGISTRY}/${DOCKER_IMAGE}")
+                    docker.build("public.ecr.aws/n5h8y2y9/java-app:latest")
                 }
             }
         }
@@ -39,9 +39,9 @@ pipeline {
         stage('Push to ECR') {
             steps {
                 script {
-                    sh "docker push ${ECR_REGISTRY}/${DOCKER_IMAGE}:latest"
+                    sh "docker push public.ecr.aws/n5h8y2y9/java-app:latest"
                     // If you want to push using the BUILD_ID as a tag
-                    sh "docker push ${ECR_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_ID}"
+                    sh "docker push public.ecr.aws/n5h8y2y9/java-app:${env.BUILD_ID}"
                     }
                 }
             }
