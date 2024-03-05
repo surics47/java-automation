@@ -1,1 +1,1 @@
-# java-automation
+# devops-automation
