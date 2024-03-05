@@ -39,9 +39,8 @@ pipeline {
         stage('Push to ECR') {
             steps {
                 script {
-                    docker.withRegistry("https://${ECR_REGISTRY}", ECR_CREDENTIALS_ID) {
-                        docker.image("${ECR_REGISTRY}/${DOCKER_IMAGE}").push("${env.BUILD_ID}")
-                        docker.image("${ECR_REGISTRY}/${DOCKER_IMAGE}").push("latest")
+                    env.AWS_ECR_PASSWORD = sh(script: "aws ecr-public get-login-password --region us-east-1", returnStdout: true).trim()
+                    sh "echo ${env.AWS_ECR_PASSWORD} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
                     }
                 }
             }
