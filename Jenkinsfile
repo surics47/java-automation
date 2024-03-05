@@ -40,8 +40,6 @@ pipeline {
             steps {
                 script {
                     sh "docker push public.ecr.aws/n5h8y2y9/java-app:latest"
-                    // If you want to push using the BUILD_ID as a tag
-                    sh "docker push public.ecr.aws/n5h8y2y9/java-app:${env.BUILD_ID}"
                     }
                 }
             }
